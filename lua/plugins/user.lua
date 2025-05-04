@@ -5,9 +5,44 @@
 return {
 
   -- == Examples of Adding Plugins ==
-  "EdenEast/nightfox.nvim",
-
   "nyoom-engineering/oxocarbon.nvim",
+
+  {
+    "0xstepit/flow.nvim",
+    lazy = false,
+    priority = 1000,
+    tag = "vX.0.0",
+    opts = {
+      -- Your configuration options here.
+    },
+  },
+
+  {
+    "slugbyte/lackluster.nvim",
+    lazy = false,
+    priority = 1000,
+    init = function()
+      -- vim.cmd.colorscheme("lackluster-hack") -- my favorite
+      -- vim.cmd.colorscheme("lackluster-mint")
+    end,
+  },
+
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
+  { "miikanissi/modus-themes.nvim", priority = 1000 },
+
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+
+  {
+    "forest-nvim/sequoia.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function() end,
+  },
 
   {
     "karb94/neoscroll.nvim",
@@ -18,6 +53,15 @@ return {
 
   {
     "sphamba/smear-cursor.nvim",
+
+    config = function()
+      require("smear_cursor").setup {
+        stiffness = 0.8,
+        trailing_stiffness = 0.5,
+        distance_stop_animating = 0.5,
+      }
+    end,
+
     opts = {
       -- Smear cursor when switching buffers or windows.
       smear_between_buffers = true,

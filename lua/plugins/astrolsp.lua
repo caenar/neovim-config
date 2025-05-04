@@ -43,7 +43,7 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
-      emmet_ls = {
+      emmet_language_server = {
         filetypes = {
           "astro",
           "css",
