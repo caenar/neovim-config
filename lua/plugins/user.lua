@@ -4,56 +4,23 @@
 ---@type LazySpec
 return {
 
-  -- == Examples of Adding Plugins ==
-  "nyoom-engineering/oxocarbon.nvim",
-
-  {
-    "0xstepit/flow.nvim",
-    lazy = false,
-    priority = 1000,
-    tag = "vX.0.0",
-    opts = {
-      -- Your configuration options here.
-    },
-  },
-
-  {
-    "slugbyte/lackluster.nvim",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      -- vim.cmd.colorscheme("lackluster-hack") -- my favorite
-      -- vim.cmd.colorscheme("lackluster-mint")
-    end,
-  },
-
-  {
-    "dgox16/oldworld.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-
-  { "miikanissi/modus-themes.nvim", priority = 1000 },
-
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
-
-  {
-    "forest-nvim/sequoia.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function() end,
-  },
-
-  {
-    "karb94/neoscroll.nvim",
-    opts = {},
-  },
+  -- Themes
+  { "cocopon/iceberg.vim" },
+  { "nanotech/jellybeans.vim" },
+  { "haishanh/night-owl.vim" },
+  { "nyoom-engineering/oxocarbon.nvim" },
+  { "navarasu/onedark.nvim" },
+  { "dgox16/oldworld.nvim", lazy = false },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false },
+  { "forest-nvim/sequoia.nvim", lazy = false },
+  { "christianchiarulli/nvcode-color-schemes.vim" },
+  { "Everblush/nvim", name = "everblush" },
+  { "NTBBloodbath/doom-one.nvim" },
 
   { "wakatime/vim-wakatime", lazy = false },
-
+  { "karb94/neoscroll.nvim", opts = {} },
   {
     "sphamba/smear-cursor.nvim",
-
     config = function()
       require("smear_cursor").setup {
         stiffness = 0.8,
@@ -61,28 +28,14 @@ return {
         distance_stop_animating = 0.5,
       }
     end,
-
     opts = {
-      -- Smear cursor when switching buffers or windows.
       smear_between_buffers = true,
-
-      -- Smear cursor when moving within line or to neighbor lines.
-      -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
       smear_between_neighbor_lines = true,
-
-      -- Draw the smear in buffer space instead of screen space when scrolling
       scroll_buffer_space = true,
-
-      -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-      -- Smears will blend better on all backgrounds.
       legacy_computing_symbols_support = false,
-
-      -- Smear cursor in insert mode.
-      -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
       smear_insert_mode = true,
     },
   },
-
   {
     "andweeb/presence.nvim",
     config = function()
@@ -118,7 +71,6 @@ return {
     config = function() require("lsp_signature").setup() end,
   },
 
-  -- == Examples of Overriding Plugins ==
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
@@ -131,7 +83,7 @@ return {
           "--line-number",
           "--column",
           "--smart-case",
-          "--hidden", -- Include hidden files
+          "--hidden",
           "--glob=!node_modules/",
           "--glob=!dist/",
           "--glob=!venv/",
@@ -171,7 +123,6 @@ return {
     end,
   },
 
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "L3MON4D3/LuaSnip",
     config = function()
@@ -181,43 +132,22 @@ return {
       }
     end,
   },
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   config = function(plugin, opts)
-  --     require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom luasnip configuration such as filetype extend or custom snippets
-  --     local luasnip = require "luasnip"
-  --     luasnip.filetype_extend("javascript", { "javascriptreact" })
-  --   end,
-  -- },
 
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)
-      require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom autopairs configuration such as custom rules
+      require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts)
       local npairs = require "nvim-autopairs"
       local Rule = require "nvim-autopairs.rule"
       local cond = require "nvim-autopairs.conds"
-      npairs.add_rules(
-        {
-          Rule("$", "$", { "tex", "latex" })
-            -- don't add a pair if the next character is %
-            :with_pair(cond.not_after_regex "%%")
-            -- don't add a pair if  the previous character is xxx
-            :with_pair(
-              cond.not_before_regex("xxx", 3)
-            )
-            -- don't move right when repeat character
-            :with_move(cond.none())
-            -- don't delete if the next character is xx
-            :with_del(cond.not_after_regex "xx")
-            -- disable adding a newline when you press <cr>
-            :with_cr(cond.none()),
-        },
-        -- disable for .vim files, but it work for another filetypes
-        Rule("a", "a", "-vim")
-      )
+      npairs.add_rules({
+        Rule("$", "$", { "tex", "latex" })
+          :with_pair(cond.not_after_regex "%%")
+          :with_pair(cond.not_before_regex("xxx", 3))
+          :with_move(cond.none())
+          :with_del(cond.not_after_regex "xx")
+          :with_cr(cond.none()),
+      }, Rule("a", "a", "-vim"))
     end,
   },
 }

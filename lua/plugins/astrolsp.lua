@@ -42,6 +42,16 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      cssls = {
+        settings = {
+          css = {
+            lint = {
+              unknownAtRules = "ignore",
+            },
+          },
+        },
+      },
+
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       emmet_language_server = {
         filetypes = {
